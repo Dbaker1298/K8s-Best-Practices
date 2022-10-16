@@ -1,0 +1,12 @@
+## Detroying the resources in reverse order
+
+1. cd k8s-infra/terraform/packtclusters
+2. terraform init && terraform destory
+
+3. cd k8s-infra/terraform/packtclusters-vpc
+4. terraform init && terraform destroy
+
+5. cd k8s-infra/terraform/shared-state
+6. First rm && rb recursively, the buckets.
+7. terraform init && terraform destory
+

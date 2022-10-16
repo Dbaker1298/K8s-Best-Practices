@@ -1,0 +1,4 @@
+kube_proxy:
+  image: "602401143452.dkr.ecr.us-east-2.amazonaws.com/eks/kube-proxy"
+  tag: "v1.23.7-minimal-eksbuild.1"
+

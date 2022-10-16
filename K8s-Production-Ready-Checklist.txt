@@ -1,0 +1,83 @@
+===================  Cluster Infrastructure  ==================================
+
+* Run a highly available control plane. Master and etcd on two separate node
+  groups. Avoid pods on the cp nodes. Etcd is very I/O intensive.
+
+* Run a highly available workders group. Autoscaling group, different az's.
+  Deploy a cluster autoscaler.
+
+* Use a shred storage management solution.
+
+* Deploy infrastructure observability stack. Logs and metrics, alerting. 
+
+
+===================  Cluster Services  ========================================
+
+* Control cluster access. LDAP, OpenID Connect (OIDC), etc. RBAC, webhooks.
+
+* Hardening the default pod security policy. PSP (deprecated)
+
+* Enforce custom policies and rules. Network policies, resource limits, quotas,
+  etc. OPA Gatekeeper (open policy agent). This will enable you to enforce
+  rules such as pods must have resource limits in place, namespaces must have
+  specific labels, images must be from know repositories, and many more.
+
+* Deploy and fine-tune the cluster DNS. CoreDNS. Optimized for performance, and
+  adjust caching, and resolution time.
+
+* Deploy and restrict network policies. Deny-all default policy to block all
+  traffic among the pods, then you create network policies with less
+  restrictive ingress/egress rules to allow the traffic.
+
+* Enforce security check and conformance testing. Tools like `kube-scan` and
+  `kube-bench` for security benchmarking and Sonobuoy to run K8s standard
+  conformance.
+
+* Deploy an observability stack for the cluster components. Monitoring and
+  central logging. With Alerting.
+
+  ====================  Apps and Deployments  =================================
+
+* Automate images quality and vulnerability scanning. 
+
+* Deploy Ingress controller. 
+
+* Manage certificates and secrets. Cert-manager, Vault, etc.
+
+* Deploy apps observability stack. Consider application performance monitoring
+  solutions, such as New Relic APM, Datadog APM, AppDynamics APM, etc.
+
+===================  Infrastructure Best Practices  ==========================
+
+++++++++++++++ 12 Principals of infrastructure design and management  +++++++++
+
+1.  Go managed. Managed services like GKE, AKS, and EKS.
+2.  Simplify. Do not go for feature riched architecture. 
+3.  Everything as Code (XaC). Use declarative infrastructure as code (IaC) and
+    configuration as code (CaC).
+4.  Immutable infrastructure. We replace system components for each deployment
+    instead of updating them in place. We always create immutable components
+    from images or a declarative code, where we can build, test, and validate
+    the immutable systems and get the same predicatable results every time.
+    Cattle instead of Pets.
+5.  Automation. Operators and GitOps.
+6.  Standardization. Internal standards to reduce teams' struggle with aligning
+    and working together, eases the scaling of the processes, improves the
+    overall quality, and increases productivity.
+7.  Source of truth. Having a single source of truth is a cornerstone and an
+    enabler to modern infrastructure management and configuration.
+8.  Design for availability. Starting from the cloud and IAS level by choosing
+    multi-zone or region architecture, then going through the K8s layer by
+    designing a multi-master cluster, and finally, the application layer by
+    deplying multiple replicas of each service.
+9.  Cloud-agnostic. Terraform versus CloudFormation.
+10. Business continuity. 
+11. Plan for failures. Expect failures, plan for system components failures. 
+12. Operational efficiency. Deliver changes continuously to an increasing
+    number of production and non-production environments.
+
+
+
+
+
+
